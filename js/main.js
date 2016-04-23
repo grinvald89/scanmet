@@ -17,9 +17,36 @@ $(document).ready(function()
 
 
 	$(".slider").tinycarousel({
-		bullets  : true
+		bullets:true
 	});
 
+	$('.uploader').mouseenter(function(){//Выделяем фальш-кнопку загрузчика при наведении
+		$(this).attr({'id':'focusUploader'});
+		$('#focusUploader.uploader button').css({
+			'background-color':'#449d44',
+			'border-color':'#398439'
+		});
+	});
+
+	$('.uploader').mouseleave(function(){//Снимаем выделение с фальш-кнопки загрузчика при снятии наведения
+		$('#focusUploader.uploader button').css({
+			'background-color':'#5cb85c',
+			'border-color':'#4cae4c'
+		});
+		$('#focusUploader.uploader').removeAttr('id');
+	});
+
+	$('.uploader input[type=file]').change(function(){
+		$(this).attr({'id':'activeInput'});
+		var value = $('.uploader input#activeInput').val();
+		$('.uploader:has(input#activeInput)').attr({'id':'activeUploader'})
+		if(value != '') $('#activeUploader.uploader input[type=submit]').trigger('click');
+		$('#activeUploader').removeAttr('id');
+		$('#activeInput').removeAttr('id');
+	});
+
+	$('.manufacturers .providers .item').eq(2).css({'margin-right':'0px'});
+	$('.manufacturers .providers .item').eq(5).css({'margin-right':'0px'});
 
 	function setPopup(){
 		$(".popup form").css({

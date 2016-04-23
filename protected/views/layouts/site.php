@@ -13,14 +13,17 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
     <?php
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery-2.2.0.min.js', CClientScript::POS_END);
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.tinycarousel.min.js', CClientScript::POS_END);
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/css/bootstrap-3.3.2-dist/js/bootstrap.min.js', CClientScript::POS_END);
     Yii::app()->clientScript->registerScriptFile('//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js', CClientScript::POS_END);
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/app.js', CClientScript::POS_END);
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/controllers/SiteController.js', CClientScript::POS_END);
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/services/SaveMenuService.js', CClientScript::POS_END);
+
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/directives/checkboxes.js', CClientScript::POS_END);
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/directives/modalMoreProvider.js', CClientScript::POS_END);
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/main.js', CClientScript::POS_END);
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.tinycarousel.js', CClientScript::POS_END);
+    
     ?>
     <base href="<?php echo Yii::app()->createAbsoluteUrl('/'); ?>/">
 </head>

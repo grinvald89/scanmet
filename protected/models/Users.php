@@ -15,6 +15,12 @@
  * @property string $phone
  * @property string $name
  * @property integer $rating
+ * @property string $spec1
+ * @property string $spec2
+ * @property string $spec3
+ * @property string $spec4
+ * @property string $spec5
+ * @property string $about
  */
 class Users extends CActiveRecord
 {
@@ -44,16 +50,17 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login, password, role, email, approved, date, company, phone, name, rating', 'required'),
+			array('login, password, role, email, approved, date, company, phone, name, rating, spec1, spec2, spec3, spec4, spec5, about', 'required'),
 			array('approved, rating', 'numerical', 'integerOnly'=>true),
 			array('login, password, email', 'length', 'max'=>30),
 			array('role', 'length', 'max'=>10),
 			array('company', 'length', 'max'=>255),
 			array('phone', 'length', 'max'=>20),
 			array('name', 'length', 'max'=>100),
+			array('spec1, spec2, spec3, spec4, spec5', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, login, password, role, email, approved, date, company, phone, name, rating', 'safe', 'on'=>'search'),
+			array('id, login, password, role, email, approved, date, company, phone, name, rating, spec1, spec2, spec3, spec4, spec5, about', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,6 +92,12 @@ class Users extends CActiveRecord
 			'phone' => 'Phone',
 			'name' => 'Name',
 			'rating' => 'Rating',
+			'spec1' => 'Spec1',
+			'spec2' => 'Spec2',
+			'spec3' => 'Spec3',
+			'spec4' => 'Spec4',
+			'spec5' => 'Spec5',
+			'about' => 'About',
 		);
 	}
 
@@ -110,6 +123,12 @@ class Users extends CActiveRecord
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('rating',$this->rating);
+		$criteria->compare('spec1',$this->spec1,true);
+		$criteria->compare('spec2',$this->spec2,true);
+		$criteria->compare('spec3',$this->spec3,true);
+		$criteria->compare('spec4',$this->spec4,true);
+		$criteria->compare('spec5',$this->spec5,true);
+		$criteria->compare('about',$this->about,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

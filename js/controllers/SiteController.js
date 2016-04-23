@@ -2,21 +2,8 @@ app.controller('SiteController',
     function SiteController($scope, $http){
         var id_goods = -1;//Id товара для отзыва
         var current_rating = 0;
-        var dataIsLoaded = 0;//Флаг (загругка данных)
-        var flagViewProviders = 0;//Флаг для остановки таймера
 
-        function loadDB(){//Получаем данные с сервера
-            //dataIsLoaded = 0;
-            // $http.get("/site/list").success(function (data) { $scope.x_data = data; })
-            // .error(function(){ alert('Не удалось загрузить список товаров, сервер не отвечает!')})
-            // .then(function(){
-                // $http.get("/site/list_users").success(function (data){ $scope.list_users = data; })
-                // .error(function(){ alert('Не удалось загрузить список пользователей, сервер не отвечает!')})
-                // .then(function(){
-            dataIsLoaded = 1;//Данные загружены
-                // });
-            // });
-        }
+        $scope.showModalMoreProvider = false;//Показать/скрыть модальное окно информация о поставщике
 
         $scope.loadMenu = function(){//Получаем меню с сервера
             $http.post("/site/get", {action:'getMenu'})
@@ -30,7 +17,6 @@ app.controller('SiteController',
             .error(function(){ alert('Не удалось загрузить меню, сервер не отвечает!')});
         }
 
-        loadDB();
     /////ОТРИСОВКА ГЛАВНОГО МЕНЮ (BEGIN)////////////////////////////////////////////////////////////////////
 
         //Объявляем переменные
@@ -95,13 +81,33 @@ app.controller('SiteController',
         }
 
         $scope.saveProfile = function(){//Сохраняем профиль
-            $http.post("/site/saveProfile", {
-                name : $('.data_input.name input').val(),
-                email : $('.data_input.email input').val(),
-                phone : $('.data_input.phone input').val(),
-                company : $('.data_input.company input').val()
-            }).success(function (data){ location.reload(true) })
+             $http.post("/site/saveProfile", {
+                name : $('input.data_input.name').val(),
+                email : $('input.data_input.email').val(),
+                phone : $('input.data_input.phone').val(),
+                company : $('input.data_input.company').val(),
+                spec1 : $('input.data_input.spec1').val(),
+                spec2 : $('input.data_input.spec2').val(),
+                spec3 : $('input.data_input.spec3').val(),
+                spec4 : $('input.data_input.spec4').val(),
+                spec5 : $('input.data_input.spec5').val(),
+                about : $('textarea.about').val()
+            })
+             .success(function (data){ location.reload(true) })
+             .error(function(){ alert('Сервер не отвечает!')});
+        }
+
+        $scope.modalMoreProvider = function(userId){
+            $scope.activeProviderId = userId;
+            $scope.showModalMoreProvider = true;
+            $http.post("/site/getUser", { userId : userId })
+            .success(function(data){ $scope.activeProvider = data; $scope.createSliders(); })
             .error(function(){ alert('Сервер не отвечает!')});
+        }
+
+        $scope.closeModalMoreProvider = function(){
+            $scope.showModalMoreProvider = false;//Скрываем директиву
+            $('.sliderProviderAboutCompany ul.overview li').remove();
         }
 
         function formMenuUni(){//Формируем меню для вывода в scope
@@ -148,19 +154,6 @@ app.controller('SiteController',
         }
     /////ОТРИСОВКА ГЛАВНОГО МЕНЮ (ENG)////////////////////////////////////////////////////////////////////
 
-    var timer = setInterval(function(){
-        //Выставляем отступы у поставщиков
-        $('.manufacturers .providers .item').eq(2).css({'margin-right':'0px'});
-        $('.manufacturers .providers .item').eq(5).css({'margin-right':'0px'});
-        setRatingProviders();//Выставляем рейтинг поставщиков
-        if (dataIsLoaded == 1)//Если данные загружены
-            if($scope.list_users.length != 0)//Если поставщики имеются
-                if($('.manufacturers .providers .item').length != 0)//Если DOM дерево построилось
-                    clearInterval(timer);//Сбрасываем таймер
-            else clearInterval(timer);//Сбрасываем таймер если нет поставщиков
-    },100);
-
-
     /////ПРИВЯЗКА СОБЫТИЙ (BEGIN)////////////////////////////////////////////////////////////////////
     function events(){
         $('.checkbox p').click(function(){//Показываем или скрываем вложеные чекбоксы по клику на родитель
@@ -201,7 +194,6 @@ app.controller('SiteController',
             .success(function (data) { alert(data); })
             .error(function(){ alert('Не удалось отправить запрос!'); });
         });
-
 
     }
     /////ПРИВЯЗКА СОБЫТИЙ (ENG)////////////////////////////////////////////////////////////////////

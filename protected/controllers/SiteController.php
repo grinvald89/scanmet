@@ -24,7 +24,7 @@ class SiteController extends Controller
         $this->render('index', array('menuRequests'=>$menuRequests, 'popularGoods'=>$popularGoods, 'popularUsers'=>$popularUsers));
     }
 
-    public function actionAbout(){
+    public function actionimg(){
         $pages = Pages::model()->findAll();
         foreach ($pages as $key) $text = $key->text;
         $this->render('about', array('text'=>$text));
@@ -183,22 +183,56 @@ class SiteController extends Controller
         else echo "Ошибка действие не указано!";
     }
 
+    public function actionGetUser(){
+        $post = json_decode(file_get_contents('php://input'), true);
+        $user = Users::model()->findByPk($post['userId']);
+        $user->login = '*';
+        $user->password = '*';
+        echo CJSON::encode($user);
+    }
+
     public function actionSaveProfile(){
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if(isset($post['name']) && isset($post['email']) && isset($post['phone']) && isset($post['company'])){
+        // if( isset($post['name']) &&
+        //     isset($post['email']) &&
+        //     isset($post['phone']) &&
+        //     isset($post['company']) &&
+        //     isset($post['spec1']) &&
+        //     isset($post['spec2']) &&
+        //     isset($post['spec3']) &&
+        //     isset($post['spec4']) &&
+        //     isset($post['spec5']) &&
+        //     isset($post['about'])){
+
+        if(file_exists('upload/photo/users/'.Yii::app()->session['user_id'].'_1'.'.jpg')) $img1 = 1; else $img1 = 0;
+        if(file_exists('upload/photo/users/'.Yii::app()->session['user_id'].'_2'.'.jpg')) $img2 = 1; else $img2 = 0;
+        if(file_exists('upload/photo/users/'.Yii::app()->session['user_id'].'_3'.'.jpg')) $img3 = 1; else $img3 = 0;
+        if(file_exists('upload/photo/users/'.Yii::app()->session['user_id'].'_4'.'.jpg')) $img4 = 1; else $img4 = 0;
+        if(file_exists('upload/photo/users/'.Yii::app()->session['user_id'].'_5'.'.jpg')) $img5 = 1; else $img5 = 0;
+
             Users::model()->updateByPk(Yii::app()->session['user_id'], array(   'name'=>$post['name'],
                                                                                 'email'=>$post['email'],
                                                                                 'phone'=>$post['phone'],
-                                                                                'company'=>$post['company']));
+                                                                                'company'=>$post['company'],
+                                                                                'spec1'=>$post['spec1'],
+                                                                                'spec2'=>$post['spec2'],
+                                                                                'spec3'=>$post['spec3'],
+                                                                                'spec4'=>$post['spec4'],
+                                                                                'spec5'=>$post['spec5'],
+                                                                                'about'=>$post['about'],
+                                                                                'img1'=>$img1,
+                                                                                'img2'=>$img2,
+                                                                                'img3'=>$img3,
+                                                                                'img4'=>$img4,
+                                                                                'img5'=>$img5));
 
-            echo 'Запись обновлена\n';
-        }
+        //     echo 'Запись обновлена\n';
+        // }
         echo('user '.Yii::app()->session['user_id']);
     }
 
-    public function getMenu()//Отдаем меню в клиент
-    {
+    public function getMenu(){//Отдаем меню в клиент
         $advanced = Advanced::model()->findAll();
         if(count($advanced) != 0){//Если БД не пустая
             foreach ($advanced as $a) $menu = $a->menu;//Сохраняем меню

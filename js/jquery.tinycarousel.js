@@ -258,8 +258,6 @@
             if(self.options.bullets) {
                 $bullets.removeClass("active");
                 $($bullets[self.slideCurrent]).addClass("active");
-                $(".bullet").parent('li').css({'background-color':'#ffffff'});
-                $(".active").parent('li').css({'background-color':'#56b547'});
             }
         }
 

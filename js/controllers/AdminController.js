@@ -10,30 +10,30 @@ app.controller('AdminController',
             .error(function(){ alert('Нет доступа к базе данных!')});
         }
 
-        function loadListNew(){//Грузим основную базу новых элементов
-            $http.get("/admin/list_new").success(function (data){ $scope.x_data_new = data; setTimeout(function(){getCompaniesNew();},300); })
-            .error(function(){ alert('Нет доступа к базе данных товаров!')});
-        }
+        // function loadListNew(){//Грузим основную базу новых элементов
+        //     $http.get("/admin/list_new").success(function (data){ $scope.x_data_new = data; setTimeout(function(){getCompaniesNew();},300); })
+        //     .error(function(){ alert('Нет доступа к базе данных товаров!')});
+        // }
 
-        function loadListUsers(){//Грузим базу пользователей, прошедших модерацию
-            $http.get("/admin/list_users").success(function (data){ $scope.x_data_users = data; })
-            .error(function(){ alert('Нет доступа к базе данных пользователей!')});
-        }
+        // function loadListUsers(){//Грузим базу пользователей, прошедших модерацию
+        //     $http.get("/admin/list_users").success(function (data){ $scope.x_data_users = data; })
+        //     .error(function(){ alert('Нет доступа к базе данных пользователей!')});
+        // }
 
-        function loadListUsersNew(){//Грузим базу новых пользователей
-            $http.get("/admin/list_users_new").success(function (data){ $scope.x_data_users_new = data; })
-            .error(function(){ alert('Нет доступа к базе данных пользователей!')});
-        }
+        // function loadListUsersNew(){//Грузим базу новых пользователей
+        //     $http.get("/admin/list_users_new").success(function (data){ $scope.x_data_users_new = data; })
+        //     .error(function(){ alert('Нет доступа к базе данных пользователей!')});
+        // }
 
-        function listRequsts(){//Грузим базу заявок
-            $http.get("/admin/list_requsts").success(function (data){ $scope.x_data_requsts = data; })
-            .error(function(){ alert('Нет доступа к базе данных заявок!')});
-        }
+        // function listRequsts(){//Грузим базу заявок
+        //     $http.get("/admin/list_requsts").success(function (data){ $scope.x_data_requsts = data; })
+        //     .error(function(){ alert('Нет доступа к базе данных заявок!')});
+        // }
 
-        function listNews(){//Грузим базу новостей
-            $http.get("/admin/list_news").success(function (data){ $scope.x_data_news = data; })
-            .error(function(){ alert('Нет доступа к базе данных новостей!')});
-        }
+        // function listNews(){//Грузим базу новостей
+        //     $http.get("/admin/list_news").success(function (data){ $scope.x_data_news = data; })
+        //     .error(function(){ alert('Нет доступа к базе данных новостей!')});
+        // }
         //   Ajax-ЗАПРОСЫ НА ЗАГРУЗКУ ДАННЫЙ (END)
 
 
@@ -124,7 +124,6 @@ app.controller('AdminController',
                 .error(function(){ alert('Не возможно подтвердить заявки на товары, сервер не отвечает!')});
         }
 
-
         $scope.disallowUser = function(index){
                 var id = parseInt($('tr td.id').eq(index).text());//Получаем id из таблицы
                 $http.post("/admin/act", {action: 'disallowUser', id:id})
@@ -139,7 +138,6 @@ app.controller('AdminController',
                 .error(function(){ alert('Не возможно откланить заявки на добавление пользователей, сервер не отвечает!')});
         }
 
-
         $scope.approvedUser = function(index){
                 var id = parseInt($('tr td.id').eq(index).text());//Получаем id из таблицы
                 $http.post("/admin/act", {action: 'approvedUser', id:id})
@@ -153,7 +151,6 @@ app.controller('AdminController',
                 .success(function (data) { alert(data); loadListUsersNew(); })
                 .error(function(){ alert('Не возможно подтвердить заявки на регистрацию, сервер не отвечает!')});
         }
-
 
         $scope.saveAbout = function(){
                 var text = $('textarea#about').val();

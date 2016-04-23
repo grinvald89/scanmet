@@ -752,10 +752,6 @@ ul.checkboxList input[type="checkbox"]:checked + span{
 	margin: 15px 30px 0px 0px;
 }
 
-/*.manufacturers .providers .item:nth-child(3n+4){
-	margin-right: 0px;
-}*/
-
 .manufacturers .item .rightBlock{
 	float: right;
 	width: 140px;
@@ -1080,12 +1076,19 @@ ul.reviewsBlock li#active{
 textarea{ resize: none; }
 
 ul.nav a{ color: #000000; }
+
+.block{ overflow: hidden; }
+
+.block .left{ float: left; }
+
+.block .right{ float: right; }
+
 /*..... /cabinet/provider/ (begin).....*/
-.profile.photo{float:left; margin-right: 30px;}
+.profile.photo{ float:left; margin-bottom: 30px; }
 
 .profile.photo img{width: 200px; height: 140px;}
 
-.profile.data{margin: 0px 0px 15px 230px;}
+.profile.data{ float: right; margin: 0px 0px 15px 0px; width: 800px; }
 
 .tableSite.cabinet table.profile{margin: 0px 0px 15px 0px; overflow: hidden; width: 1400px;}
 
@@ -1095,14 +1098,21 @@ table.profile td{
 	font-family: Exo-Bold,sans-serif;
 	border: 1px solid #ff6427;
 }
-table.profile td.header{padding: 10px 20px 10px 20px;}
+.profile .header{ padding: 10px 20px 10px 20px; }
 
-table.profile td.data_input input{
-	border: none;
-	outline: none;
-	background: none;
-	text-indent: 20px;
-}
+.profile input.data_input{ margin-top: 5px; width: 400px; }
+
+.profile input.data_input.spec{ margin-left: 20px; }
+
+.profile p.info{ font-size: 11px; margin-top: 10px; margin-left: 210px; }
+
+.profile .left{ width: 200px; overflow: none; }
+
+.profile .right{ width: 580px; overflow: none; }
+
+.profile textarea{ margin-left: 20px; width: 780px; }
+
+.profile button.saveProfile{ margin: 20px; }
 
 .sliderANDtable.cabinet.provider{height: 530px;}
 
@@ -1250,3 +1260,137 @@ textarea#about{
 	padding: 10px;
 }
 /*..... /admin/ (end).....*/
+
+.modalMoreProvider.modalBody{
+	position: fixed;
+	opacity: 0.99;
+	z-index: 2;
+	width: 800px;
+	height: 800px;
+	top: 50%;
+	left: 50%;
+	margin-left: -400px;
+	margin-top: -400px;
+	border-radius: 10px;
+	background-color: #ffffff;
+}
+
+.modalMoreProvider img.logoPriver{ float: left; margin: 4px 20px 20px 0px; }
+
+.modalMoreProvider span.aboutCompany{ text-align: justify; }
+
+.modalMoreProvider ul.reviews{ margin: 15px 0px 0px 325px; }
+
+.modalMoreProvider ul.reviews li{ float: left; }
+
+.modalMoreProvider.overlay{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.7;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+
+/* Tiny Carousel */
+.sliderProviderAboutCompany,
+.sliderProviderGoods{
+    margin: 30px 0 0;
+    overflow: hidden;
+    position: relative;
+    padding: 0 50px 10px;
+}
+
+.sliderProviderAboutCompany .viewport,
+.sliderProviderGoods .viewport{
+    height: 125px;
+    overflow: hidden;
+    position: relative;
+}
+
+.sliderProviderGoods .viewport{
+	height: 200px;
+}
+
+.sliderProviderAboutCompany .buttons,
+.sliderProviderGoods .buttons{
+    display: block;
+    position: absolute;
+    top: 33%;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    color: #C01313;
+    font-weight: bold;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.sliderProviderAboutCompany .next,
+.sliderProviderGoods .next{
+    right: 0;
+    left: auto;
+    top: 33%;
+}
+
+.sliderProviderAboutCompany .disable,
+.sliderProviderGoods .disable,{
+    visibility: hidden;
+}
+
+.sliderProviderAboutCompany .overview,
+.sliderProviderGoods .overview{
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 240px;
+    left: 0;
+    top: 0;
+}
+
+.sliderProviderAboutCompany .overview li,
+.sliderProviderGoods .overview li{
+    float: left;
+    margin: 0 20px 0 0;
+    padding: 1px;
+    height: 150px;
+    width: 200px;
+    overflow: hidden;
+ }
+
+ .sliderProviderAboutCompany .overview li,
+ .sliderProviderAboutCompany .overview li img{
+ 	height: 400px;
+ 	width: 700px;
+ }
+
+.uploader input[type=file]{ 
+	position: absolute;
+	width: 150px;
+	height: 35px;
+	border: 1px solid black;
+	opacity: 0;
+}
+
+.uploader button{ padding: 6px 0px; text-align: center; width: 150px; }
+
+.uploaderBlock{ margin-top: 20px; }
+
+.uploaderBlock form{ margin: 10px 0px 0px 25px; width: 150px; overflow: hidden; }
+
+.uploaderBlock img{ padding: 0px; }
+
+span.closeModalMoreProvider{
+	position: absolute;
+	margin: 17px 0px 0px 722px;
+	font-size: 40px;
+	color: #ffffff;
+	cursor: pointer;
+}
